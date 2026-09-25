@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌕 Chúc Mừng Trung Thu 25/9 🌕</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0b1026 0%, #1a1f4a 50%, #2b1b4d 100%);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    padding: 30px 0;
+  }
+
+  /* ===== SAO TRỜI NHẤP NHÁY ===== */
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.2; transform: scale(0.8); }
+    to   { opacity: 1;   transform: scale(1.2); }
+  }
+
+  /* ===== SAO BĂNG BAY ===== */
+  .shooting-star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px #fff, 0 0 20px 4px rgba(255,255,200,0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(-90deg, #fff, transparent);
+    transform: translateY(-50%);
+  }
+  @keyframes shoot {
+    0% {
+      transform: translate(0, 0) rotate(-35deg);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+      transform: translate(-600px, 420px) rotate(-35deg);
+      opacity: 0;
+    }
+  }
+
+  /* ===== NGÔI SAO BAY LƠ LỬNG ===== */
+  .flying-star {
+    position: fixed;
+    font-size: 1.5rem;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(255,230,130,0.9));
+  }
+  @keyframes flyAcross {
+    0% {
+      transform: translate(-10vw, 0) rotate(0deg) scale(0.6);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    50% {
+      transform: translate(50vw, -60px) rotate(180deg) scale(1.1);
+      opacity: 1;
+    }
+    90% { opacity: 1; }
+    100% {
+      transform: translate(110vw, 40px) rotate(360deg) scale(0.6);
+      opacity: 0;
+    }
+  }
+  @keyframes flyAcrossReverse {
+    0% {
+      transform: translate(110vw, 0) rotate(0deg) scale(0.6);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    50% {
+      transform: translate(50vw, 60px) rotate(-180deg) scale(1.1);
+      opacity: 1;
+    }
+    90% { opacity: 1; }
+    100% {
+      transform: translate(-10vw, -40px) rotate(-360deg) scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  /* ===== MẶT TRĂNG ===== */
+  .moon {
+    position: fixed;
+    top: 6%;
+    right: 10%;
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle at 35% 35%, #fffbe0, #ffe98a 60%, #f4c542);
+    border-radius: 50%;
+    box-shadow: 0 0 60px 20px rgba(255, 230, 130, 0.6),
+                0 0 120px 40px rgba(255, 220, 100, 0.3);
+    animation: moonGlow 4s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+  @keyframes moonGlow {
+    from { box-shadow: 0 0 50px 15px rgba(255,230,130,0.5), 0 0 100px 30px rgba(255,220,100,0.25); }
+    to   { box-shadow: 0 0 80px 25px rgba(255,240,160,0.8), 0 0 150px 50px rgba(255,220,100,0.4); }
+  }
+
+  /* ===== ĐÈN LỒNG BAY ===== */
+  .lantern {
+    position: fixed;
+    font-size: 2.2rem;
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 0 10px rgba(255,120,50,0.8));
+    z-index: 2;
+    pointer-events: none;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(110vh) rotate(-5deg); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    to   { transform: translateY(-20vh) rotate(5deg); opacity: 0; }
+  }
+
+  /* ===== CARD CHÍNH ===== */
+  .card {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 45px 35px;
+    max-width: 700px;
+    width: 92%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 215, 100, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 40px rgba(255,215,100,0.08);
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .emoji-top {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    background: linear-gradient(90deg, #ffd75e, #ff9e3d, #ffd75e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shine 3s linear infinite;
+    margin-bottom: 15px;
+    font-weight: 800;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .date {
+    display: inline-block;
+    padding: 6px 20px;
+    background: linear-gradient(90deg, #ff9e3d, #ffd75e);
+    color: #2b1b4d;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== DANH SÁCH NGƯỜI NHẬN ===== */
+  .people-title {
+    font-size: 1.15rem;
+    color: #ffd75e;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .person {
+    background: linear-gradient(135deg, rgba(255,215,100,0.15), rgba(255,158,61,0.1));
+    border: 1.5px solid rgba(255,215,100,0.4);
+    border-radius: 14px;
+    padding: 14px 10px;
+    transition: all 0.35s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .person::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,215,100,0.25), transparent);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .person:hover::before { opacity: 1; }
+
+  .person:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,180,60,0.5);
+    border-color: #ffd75e;
+  }
+
+  .person .name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffd75e;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .person .sub {
+    font-size: 0.78rem;
+    color: #e6dcff;
+    opacity: 0.85;
+  }
+
+  /* ===== NÚT ===== */
+  .btn {
+    padding: 14px 36px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2b1b4d;
+    background: linear-gradient(135deg, #ffd75e, #ff9e3d);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255,160,60,0.5);
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(255,160,60,0.8);
+  }
+  .btn:active { transform: scale(0.97); }
+
+  /* ===== BAY LÊN ===== */
+  .heart {
+    position: fixed;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: heartFly 2s ease-out forwards;
+    z-index: 999;
+  }
+  @keyframes heartFly {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-180px) scale(1.5); opacity: 0; }
+  }
+
+  /* ===== LỜI CHÚC HIỆN RA ===== */
+  .wish-box {
+    margin-top: 22px;
+    min-height: 70px;
+    padding: 16px 20px;
+    background: rgba(255,215,100,0.1);
+    border: 1.5px dashed rgba(255,215,100,0.5);
+    border-radius: 14px;
+    font-size: 1.05rem;
+    color: #fff;
+    line-height: 1.6;
+    transition: all 0.4s;
+    opacity: 0;
+  }
+  .wish-box.show {
+    opacity: 1;
+    animation: popIn 0.5s ease;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .wish-box .to-name {
+    color: #ffd75e;
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    width: 100%;
+    z-index: 5;
+  }
+
+  @media (max-width: 480px) {
+    .moon { width: 80px; height: 80px; top: 5%; right: 8%; }
+    .people-grid { grid-template-columns: repeat(2, 1fr); }
+    .card { padding: 35px 22px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Mặt trăng -->
+  <div class="moon"></div>
+
+  <!-- Card chính -->
+  <div class="card">
+    <div class="emoji-top">🏮🌕🏮</div>
+    <h1>Chúc Mừng Trung Thu</h1>
+    <div class="date">📅 25/09/2026</div>
+
+    <div class="people-title">💌 Lời chúc gửi đến:</div>
+    <div class="people-grid" id="peopleGrid">
+      <!-- Tự động sinh bằng JS -->
+    </div>
+
+    <button class="btn" onclick="sendWish()">🎁 Gửi Lời Chúc</button>
+
+    <div class="wish-box" id="wishBox"></div>
+  </div>
+
+  <footer>Made with 💛 — Trung Thu 25/09</footer>
+
+<script>
+  /* ===== DANH SÁCH NGƯỜI NHẬN ===== */
+  const people = [
+    { name: "Hằng",   emoji: "🌙", wish: "Chúc Hằng có một mùa Trung Thu thật an yên, xinh đẹp như chị Hằng nhé! 🌕" },
+    { name: "Na",     emoji: "🌼", wish: "Chúc Na Trung Thu vui vẻ, ngọt ngào như bánh dẻo, ấm áp như bánh nướng! 🥮" },
+    { name: "Biền",   emoji: "⭐", wish: "Chúc Biền luôn mạnh khỏe, gặp nhiều may mắn và thành công trong cuộc sống! 🌟" },
+    { name: "Khang",  emoji: "🏮", wish: "Chúc Khang một Trung Thu rực rỡ, tương lai sáng như đèn lồng đêm rằm! 🏮" },
+    { name: "Thái",   emoji: "🎐", wish: "Chúc Thái Trung Thu bình an, mọi điều ước đều thành hiện thực! ✨" },
+    { name: "Trúc",   emoji: "💖", wish: "Chúc Trúc mùa trăng này ngập tràn yêu thương và niềm vui bên gia đình! 🌸" },
+    { name: "H.Long", emoji: "🐉", wish: "Chúc H.Long Trung Thu đoàn viên, sự nghiệp rồng bay phượng múa, vạn sự như ý! 🐉" }
+  ];
+
+  /* ===== SINH DANH SÁCH NGƯỜI ===== */
+  const grid = document.getElementById('peopleGrid');
+  people.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'person';
+    div.innerHTML = `
+      <span class="name">${p.emoji} ${p.name}</span>
+      <span class="sub">Bấm để xem lời chúc</span>
+    `;
+    div.onclick = () => showWish(i, true);
+    grid.appendChild(div);
+  });
+
+  /* ===== TẠO 100 NGÔI SAO NHẤP NHÁY ===== */
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2.5 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 2 + 's';
+    star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    document.body.appendChild(star);
+  }
+
+  /* ===== TẠO SAO BĂNG ===== */
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.left = Math.random() * 60 + 50 + '%';
+    star.style.top = Math.random() * 40 + '%';
+    star.style.animation = `shoot ${1 + Math.random() * 1}s linear forwards`;
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 2500);
+  }
+  setInterval(createShootingStar, 1800);
+  // Tạo vài cái ngay ban đầu
+  for (let i = 0; i < 3; i++) setTimeout(createShootingStar, i * 500);
+
+  /* ===== TẠO NGÔI SAO BAY LƠ LỬNG KHẮP TRỜI ===== */
+  const starEmojis = ['⭐', '🌟', '✨', '💫', '🌠'];
+  function createFlyingStar() {
+    const s = document.createElement('div');
+    s.className = 'flying-star';
+    s.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+    s.style.top = Math.random() * 90 + '%';
+    s.style.fontSize = (0.9 + Math.random() * 1.5) + 'rem';
+    const reverse = Math.random() > 0.5;
+    const duration = 8 + Math.random() * 8;
+    s.style.animation = `${reverse ? 'flyAcrossReverse' : 'flyAcross'} ${duration}s linear forwards`;
+    s.style.animationDelay = Math.random() * 2 + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), (duration + 3) * 1000);
+  }
+  // Tạo liên tục
+  setInterval(createFlyingStar, 700);
+  // Tạo 15 cái ban đầu rải rác
+  for (let i = 0; i < 15; i++) {
+    setTimeout(createFlyingStar, i * 200);
+  }
+
+  /* ===== TẠO ĐÈN LỒNG BAY ===== */
+  const lanternEmojis = ['🏮', '🎐', '🌟', '✨'];
+  for (let i = 0; i < 8; i++) {
+    const lantern = document.createElement('div');
+    lantern.className = 'lantern';
+    lantern.textContent = lanternEmojis[i % lanternEmojis.length];
+    lantern.style.left = Math.random() * 100 + '%';
+    lantern.style.animationDuration = (8 + Math.random() * 6) + 's';
+    lantern.style.animationDelay = Math.random() * 10 + 's';
+    lantern.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+    document.body.appendChild(lantern);
+  }
+
+  /* ===== HIỆN LỜI CHÚC ===== */
+  const wishBox = document.getElementById('wishBox');
+
+  function showWish(index, scroll = false) {
+    const p = people[index];
+    wishBox.innerHTML = `
+      <span class="to-name">${p.emoji} Gửi ${p.name}:</span>
+      ${p.wish}
+    `;
+    wishBox.classList.remove('show');
+    void wishBox.offsetWidth; // reset animation
+    wishBox.classList.add('show');
+
+    // Tim bay
+    burstHearts(p.emoji);
+
+    if (scroll) {
+      wishBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  /* ===== NÚT GỬI - CHỌN NGẪU NHIÊN ===== */
+  function sendWish() {
+    const idx = Math.floor(Math.random() * people.length);
+    showWish(idx);
+  }
+
+  /* ===== TIM BAY ===== */
+  function burstHearts(emoji = '💛') {
+    const icons = [emoji, '💛', '🏮', '🌟', '🥮', '💖'];
+    for (let i = 0; i < 14; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+      heart.style.left = (window.innerWidth / 2 + (Math.random() - 0.5) * 320) + 'px';
+      heart.style.top = (window.innerHeight / 2 + 100) + 'px';
+      heart.style.animationDelay = (i * 0.07) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2500);
+    }
+  }
+
+  /* ===== TỰ ĐỘNG CHÀO ===== */
+  window.addEventListener('load', () => {
+    setTimeout(() => showWish(0), 900);
+  });
+</script>
+</body>
+</html>
