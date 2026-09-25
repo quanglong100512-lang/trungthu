@@ -22,18 +22,55 @@
 
   /* ===== SAO TRỜI NHẤP NHÁY ===== */
   .star {
-    position: absolute;
+    position: fixed;
     background: #fff;
     border-radius: 50%;
     animation: twinkle 2s infinite alternate;
     pointer-events: none;
+    z-index: 0;
   }
   @keyframes twinkle {
     from { opacity: 0.2; transform: scale(0.8); }
     to   { opacity: 1;   transform: scale(1.2); }
   }
 
-  /* ===== SAO BĂNG BAY ===== */
+  /* ===== CHỮ BAY BỔNG NHƯ SAO - CHỈ BAY NGANG ===== */
+  .flying-text {
+    position: fixed;
+    white-space: nowrap;
+    font-weight: 800;
+    pointer-events: none;
+    z-index: 2;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ffd75e, #fff, #ffd75e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(255,220,120,0.9));
+    animation: shine 3s linear infinite;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  /* Bay từ trái sang phải - CHỈ NGANG, KHÔNG LÊN XUỐNG */
+  @keyframes flyLeftToRight {
+    from { transform: translateX(-30vw); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    to   { transform: translateX(110vw); opacity: 0; }
+  }
+
+  /* Bay từ phải sang trái - CHỈ NGANG, KHÔNG LÊN XUỐNG */
+  @keyframes flyRightToLeft {
+    from { transform: translateX(110vw); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    to   { transform: translateX(-30vw); opacity: 0; }
+  }
+
+  /* ===== SAO BĂNG ===== */
   .shooting-star {
     position: fixed;
     width: 3px;
@@ -55,56 +92,9 @@
     transform: translateY(-50%);
   }
   @keyframes shoot {
-    0% {
-      transform: translate(0, 0) rotate(-35deg);
-      opacity: 0;
-    }
+    0% { transform: translate(0, 0) rotate(-35deg); opacity: 0; }
     10% { opacity: 1; }
-    100% {
-      transform: translate(-600px, 420px) rotate(-35deg);
-      opacity: 0;
-    }
-  }
-
-  /* ===== NGÔI SAO BAY LƠ LỬNG ===== */
-  .flying-star {
-    position: fixed;
-    font-size: 1.5rem;
-    pointer-events: none;
-    z-index: 2;
-    filter: drop-shadow(0 0 8px rgba(255,230,130,0.9));
-  }
-  @keyframes flyAcross {
-    0% {
-      transform: translate(-10vw, 0) rotate(0deg) scale(0.6);
-      opacity: 0;
-    }
-    10% { opacity: 1; }
-    50% {
-      transform: translate(50vw, -60px) rotate(180deg) scale(1.1);
-      opacity: 1;
-    }
-    90% { opacity: 1; }
-    100% {
-      transform: translate(110vw, 40px) rotate(360deg) scale(0.6);
-      opacity: 0;
-    }
-  }
-  @keyframes flyAcrossReverse {
-    0% {
-      transform: translate(110vw, 0) rotate(0deg) scale(0.6);
-      opacity: 0;
-    }
-    10% { opacity: 1; }
-    50% {
-      transform: translate(50vw, 60px) rotate(-180deg) scale(1.1);
-      opacity: 1;
-    }
-    90% { opacity: 1; }
-    100% {
-      transform: translate(-10vw, -40px) rotate(-360deg) scale(0.6);
-      opacity: 0;
-    }
+    100% { transform: translate(-600px, 420px) rotate(-35deg); opacity: 0; }
   }
 
   /* ===== MẶT TRĂNG ===== */
@@ -148,7 +138,7 @@
     z-index: 10;
     text-align: center;
     padding: 45px 35px;
-    max-width: 700px;
+    max-width: 750px;
     width: 92%;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
@@ -183,9 +173,6 @@
     animation: shine 3s linear infinite;
     margin-bottom: 15px;
     font-weight: 800;
-  }
-  @keyframes shine {
-    to { background-position: 200% center; }
   }
 
   .date {
@@ -319,6 +306,24 @@
     margin-bottom: 6px;
   }
 
+  /* ===== QR CODE ===== */
+  .qr-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(255,215,100,0.3);
+  }
+  .qr-section p {
+    color: #ffd75e;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .qr-section img {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(255,215,100,0.4);
+    background: #fff;
+    padding: 8px;
+  }
+
   footer {
     position: absolute;
     bottom: 15px;
@@ -348,19 +353,29 @@
     <div class="date">📅 25/09/2026</div>
 
     <div class="people-title">💌 Lời chúc gửi đến:</div>
-    <div class="people-grid" id="peopleGrid">
-      <!-- Tự động sinh bằng JS -->
-    </div>
+    <div class="people-grid" id="peopleGrid"></div>
 
     <button class="btn" onclick="sendWish()">🎁 Gửi Lời Chúc</button>
 
     <div class="wish-box" id="wishBox"></div>
+
+    <!-- QR CODE (thay link của mày vào) -->
+    <div class="qr-section">
+      <p>📱 Quét mã QR để mở web này</p>
+      <img 
+        src="https://api.qrserver.com/v1/create-qr-code/?data=https://example.github.io/trungthu/&size=180x180&bgcolor=ffffff&color=2b1b4d" 
+        alt="QR Code"
+        width="180"
+        height="180"
+      >
+      <p style="font-size:0.78rem; color:#ccc; margin-top:8px; font-weight:400;">Đưa camera vào để truy cập</p>
+    </div>
   </div>
 
   <footer>Made with 💛 — Trung Thu 25/09</footer>
 
 <script>
-  /* ===== DANH SÁCH NGƯỜI NHẬN ===== */
+  /* ===== DANH SÁCH NGƯỜI NHẬN (đã thêm Trâm) ===== */
   const people = [
     { name: "Hằng",   emoji: "🌙", wish: "Chúc Hằng có một mùa Trung Thu thật an yên, xinh đẹp như chị Hằng nhé! 🌕" },
     { name: "Na",     emoji: "🌼", wish: "Chúc Na Trung Thu vui vẻ, ngọt ngào như bánh dẻo, ấm áp như bánh nướng! 🥮" },
@@ -368,7 +383,8 @@
     { name: "Khang",  emoji: "🏮", wish: "Chúc Khang một Trung Thu rực rỡ, tương lai sáng như đèn lồng đêm rằm! 🏮" },
     { name: "Thái",   emoji: "🎐", wish: "Chúc Thái Trung Thu bình an, mọi điều ước đều thành hiện thực! ✨" },
     { name: "Trúc",   emoji: "💖", wish: "Chúc Trúc mùa trăng này ngập tràn yêu thương và niềm vui bên gia đình! 🌸" },
-    { name: "H.Long", emoji: "🐉", wish: "Chúc H.Long Trung Thu đoàn viên, sự nghiệp rồng bay phượng múa, vạn sự như ý! 🐉" }
+    { name: "H.Long", emoji: "🐉", wish: "Chúc H.Long Trung Thu đoàn viên, sự nghiệp rồng bay phượng múa, vạn sự như ý! 🐉" },
+    { name: "Trâm",   emoji: "🌸", wish: "Chúc Trâm Trung Thu thật dịu dàng và xinh đẹp như ánh trăng rằm, mọi điều ước đều thành sự thật! 💝" }
   ];
 
   /* ===== SINH DANH SÁCH NGƯỜI ===== */
@@ -384,8 +400,8 @@
     grid.appendChild(div);
   });
 
-  /* ===== TẠO 100 NGÔI SAO NHẤP NHÁY ===== */
-  for (let i = 0; i < 100; i++) {
+  /* ===== TẠO 120 NGÔI SAO NHẤP NHÁY ===== */
+  for (let i = 0; i < 120; i++) {
     const star = document.createElement('div');
     star.className = 'star';
     const size = Math.random() * 2.5 + 1;
@@ -398,6 +414,46 @@
     document.body.appendChild(star);
   }
 
+  /* ===== CHỮ BAY BỔNG NHƯ SAO - CHỈ HÀNG NGANG ===== */
+  const flyingTexts = [
+    "🌕 Trung Thu Vui Vẻ 🌕",
+    "Chúc Mừng Trung Thu 25/9",
+    "🏮 Đoàn Viên 🏮",
+    "✨ Vạn Sự Như Ý ✨",
+    "🌙 Chị Hằng Chúc Phúc 🌙",
+    "🥮 Bánh Dẻo Bánh Nướng 🥮",
+    "💛 Ấm Áp Yêu Thương 💛",
+    "⭐ Sum Vầy Hạnh Phúc ⭐",
+    "🎐 Bình An May Mắn 🎐",
+    "🏮 Đêm Rằm Sáng Tỏ 🏮"
+  ];
+
+  function createFlyingText() {
+    const text = document.createElement('div');
+    text.className = 'flying-text';
+    text.textContent = flyingTexts[Math.floor(Math.random() * flyingTexts.length)];
+    
+    // Random vị trí DỌC (top) - nhưng KHÔNG di chuyển lên xuống trong lúc bay
+    text.style.top = (5 + Math.random() * 85) + '%';
+    text.style.fontSize = (0.85 + Math.random() * 0.9) + 'rem';
+    
+    // Random hướng bay: trái→phải hoặc phải→trái
+    const reverse = Math.random() > 0.5;
+    const duration = 10 + Math.random() * 8;
+    
+    text.style.animation = `${reverse ? 'flyRightToLeft' : 'flyLeftToRight'} ${duration}s linear forwards`;
+    
+    document.body.appendChild(text);
+    setTimeout(() => text.remove(), (duration + 1) * 1000);
+  }
+
+  // Tạo chữ bay liên tục mỗi 1.2 giây
+  setInterval(createFlyingText, 1200);
+  // Tạo 8 chữ ban đầu rải rác
+  for (let i = 0; i < 8; i++) {
+    setTimeout(createFlyingText, i * 250);
+  }
+
   /* ===== TẠO SAO BĂNG ===== */
   function createShootingStar() {
     const star = document.createElement('div');
@@ -408,31 +464,8 @@
     document.body.appendChild(star);
     setTimeout(() => star.remove(), 2500);
   }
-  setInterval(createShootingStar, 1800);
-  // Tạo vài cái ngay ban đầu
+  setInterval(createShootingStar, 2200);
   for (let i = 0; i < 3; i++) setTimeout(createShootingStar, i * 500);
-
-  /* ===== TẠO NGÔI SAO BAY LƠ LỬNG KHẮP TRỜI ===== */
-  const starEmojis = ['⭐', '🌟', '✨', '💫', '🌠'];
-  function createFlyingStar() {
-    const s = document.createElement('div');
-    s.className = 'flying-star';
-    s.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
-    s.style.top = Math.random() * 90 + '%';
-    s.style.fontSize = (0.9 + Math.random() * 1.5) + 'rem';
-    const reverse = Math.random() > 0.5;
-    const duration = 8 + Math.random() * 8;
-    s.style.animation = `${reverse ? 'flyAcrossReverse' : 'flyAcross'} ${duration}s linear forwards`;
-    s.style.animationDelay = Math.random() * 2 + 's';
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), (duration + 3) * 1000);
-  }
-  // Tạo liên tục
-  setInterval(createFlyingStar, 700);
-  // Tạo 15 cái ban đầu rải rác
-  for (let i = 0; i < 15; i++) {
-    setTimeout(createFlyingStar, i * 200);
-  }
 
   /* ===== TẠO ĐÈN LỒNG BAY ===== */
   const lanternEmojis = ['🏮', '🎐', '🌟', '✨'];
@@ -457,18 +490,14 @@
       ${p.wish}
     `;
     wishBox.classList.remove('show');
-    void wishBox.offsetWidth; // reset animation
+    void wishBox.offsetWidth;
     wishBox.classList.add('show');
-
-    // Tim bay
     burstHearts(p.emoji);
-
     if (scroll) {
       wishBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 
-  /* ===== NÚT GỬI - CHỌN NGẪU NHIÊN ===== */
   function sendWish() {
     const idx = Math.floor(Math.random() * people.length);
     showWish(idx);
